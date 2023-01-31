@@ -71,7 +71,6 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value,
   };
-  // console.log(newNote);
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
@@ -119,7 +118,6 @@ const handleRenderSaveBtn = () => {
 
 // Render the list of note titles
 const renderNoteList = async (notes) => {
-  console.log("get route hit 2");
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
@@ -140,6 +138,7 @@ const renderNoteList = async (notes) => {
     liEl.append(spanEl);
 
     if (delBtn) {
+      console.log("Here in delete in index.html");
       const delBtnEl = document.createElement('i');
       delBtnEl.classList.add(
         'fas',

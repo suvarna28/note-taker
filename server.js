@@ -32,9 +32,6 @@ app.get('/api/notes', (req, res) => {
 });
 
 app.post('/api/notes', (req, res) => {
-    // Log that a POST request was received
-    console.info(`${req.method} request received to add a review`);
-
     // Destructuring assignment for the items in req.body
     const { title, text } = req.body;
 
@@ -75,13 +72,48 @@ app.post('/api/notes', (req, res) => {
             body: newNote,
         };
 
-        console.log(response);
+        // console.log(response);
         res.status(201).json(response);
     } else {
         res.status(500).json('Error in posting review');
     }
 });
 
+// DELETE Route for a particular note
+app.delete('/api/notes/:id', (req, res) => {
+    // let params = req.params;
+    console.log(`${req.method} request received to add a review`);
+    const noteId  = req.params.id;
+    console.log("Note ID here : " + noteId);
+});
+
 app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
+
+
+// fs.readFile('./db/db.json', 'utf8', (err, data) => {
+    //     if (err) {
+    //         console.error(err);
+    //     } else {
+    //         for (let x = 0; x < data.length; x++) { 
+    //             console.log("inside for loop" + data[x].note_id);
+    //             if (noteId === data[x].note_id) { 
+                    
+    //                 console.log("1 : " + noteId + "2 : " + data[x].note_id)
+    //             }
+    //         }
+    //         // const parsedNotesArray = JSON.parse(data);
+    //         // parsedNotesArray = parsedNotesArray.filter((note) => note.note_id !== noteId);
+    //         // console.log("Here" + newNoteArray);
+    //         // fs.writeFile(
+    //         //     './db/db.json',
+    //         //     JSON.stringify(newNoteArray, null, 4),
+    //         //     (writeErr) =>
+    //         //         writeErr
+    //         //             ? console.error(writeErr)
+    //         //             : console.info('Successfully updated notes!')
+    //         // );
+    //         // res.json(JSON.parse(newNoteArray))
+    //     }
+    // });
