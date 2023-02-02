@@ -1,30 +1,37 @@
+// Require all the packages
 const express = require('express');
 const path = require('path');
 const { addAbortSignal } = require('stream');
 const fs = require('fs');
 const uuid = require('./helpers/uuid');
 
+// Set the port
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 
+// Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
+// GET route for homepage
 app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
+// GET route for notes page
 app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
+// POST route for adding new note 
 app.post('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/notes.html'))
 });
 
+// GET api route that retrieves and displays all the existing notes 
 app.get('/api/notes', (req, res) => {
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
         if (err) {
@@ -35,6 +42,7 @@ app.get('/api/notes', (req, res) => {
     });
 });
 
+// POST route for submmitting and saving the enteres note
 app.post('/api/notes', (req, res) => {
     const { title, text } = req.body;
     if (title && text) {
@@ -69,7 +77,7 @@ app.post('/api/notes', (req, res) => {
     }
 });
 
-// DELETE Route for a particular note
+// DELETE route to delete the existing note when clicked on trash icon
 app.delete('/api/notes/:id', (req, res) => {
     let noteId = req.params.id;
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
