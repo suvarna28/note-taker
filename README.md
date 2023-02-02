@@ -1,6 +1,6 @@
 # note-taker
 
-This is a Note Taker application, that can be used to create and save your notes to organize your plans. This application uses an Express.js back end and will save and retrieve note data from a JSON file.
+This is a Note Taker application, that can be used to create and save your notes to organize your plans. This application uses an Express.js back end and will save and retrieve note data from a JSON file. The application is deployed on Heroku. 
 
 ## Description
 
