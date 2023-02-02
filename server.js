@@ -42,7 +42,7 @@ app.get('/api/notes', (req, res) => {
     });
 });
 
-// POST route for submmitting and saving the enteres note
+// POST route for submmitting and saving the entered note
 app.post('/api/notes', (req, res) => {
     const { title, text } = req.body;
     if (title && text) {
